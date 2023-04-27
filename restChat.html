@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-	   
+	 
 <script src="https://smtpjs.com/v3/smtp.js"></script>
 <script type="text/javascript">
     function emailInvite() {
@@ -16,15 +16,11 @@
    	 Subject : "Join my Chat",
    	 Body : "Hey!! Join me at http://3.128.197.4/restChat/restChat.html"
 	}).then(
-  message => alert("Email Sent :)")
+  message => alert("Email Sent :). Check your spam!")
 );
     }
 </script>
-	   
-	   
-	<style>
-	body {background-image: url("image-min.jpg");background-size: 100% 130%;}
-   	</style>   
+	     
 	<style>.chatHeader {border: 5px outset #EC5800;background-color:#d9e3da;color:black;text-align:center;}</style>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -138,12 +134,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <input type="button" class="btn btn-primary" id="registerBtn" value="Save Changes"></button>
       </div>
     </div>
   </div>
 </div>
       <footer>
+	      <br><br><br><br><br>
          <p>&copy; Kenyon CS 2023</p>
       </footer>
       <!-- Bootstrap core JavaScript
