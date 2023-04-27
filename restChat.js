@@ -23,6 +23,7 @@ document.getElementById('login-btn').addEventListener("click", (e) => {
 /* Set up buttons */
 document.getElementById('leave-btn').addEventListener("click", leaveSession);
 document.getElementById('send-btn').addEventListener("click", sendText);
+document.getElementById('registerBtn').addEventListener("click",registerUser);
 
 // Watch for enter on message box
 document.getElementById('message').addEventListener("keydown", (e)=> {
@@ -37,28 +38,46 @@ window.onbeforeunload = leaveSession;
 
 
 function completeJoin(results) {
-	var status = results['status'];
-	if (status != "success") {
-		alert("Username already exists!");
-		leaveSession();
-		return;
-	}
-	var user = results['user'];
-	console.log("Join:"+user);
-	currentUsers.indexOf(user) === -1? currentUsers.push(user) : console.log("This item already exists"); 
-	//currentUsers.push(messages[0].user); 
-	//printing the array to dev tools
-	//console.log(currentUsers); 
-	var chatMembers = "<font color='blue'>" + currentUsers + ", </font>";
-		document.getElementById('members').innerHTML=""; 
-		document.getElementById('members').innerHTML +=
-	    	chatMembers; 
-	startSession(user);
+    var status = results['status'];
+    if (status != "success") {
+        alert("Incorrect Username/Pass! Register if you haven't already");
+        leaveSession();
+        return;
+    }
+    var user = results['user'];
+    console.log(user+"joins");
+    /*fetchUsers();*/
+    inthandle=setInterval(fetchUsers,500);   /*to check for new users every 500ms*/
+    startSession(user);
 }
+
+
+/* Check for new users */	
+function fetchUsers() {
+	fetch(baseUrl+'/chat/users', {
+        method: 'get'
+    })
+    .then (response => response.json() )
+    .then (data =>updateUser(data))
+    .catch(error => {
+        {alert("Error: Something went wrong:"+error);}
+    })
+}
+
+/*Dynamically update the user list*/
+function updateUser(result) {
+  var currentUsers = result["users"];
+  console.log(currentUsers);
+  document.getElementById('members').innerHTML="";
+  document.getElementById('members').innerHTML = currentUsers.toString();
+}
+	
+
 
 function join() {
 	myname = document.getElementById('yourname').value;
-	fetch(baseUrl+'/chat/join/'+myname, {
+	mypass = document.getElementById('yourpass').value;
+	fetch(baseUrl+'/chat/join/'+myname+'/'+mypass, {
         method: 'get'
     })
     .then (response => response.json() )
@@ -70,7 +89,37 @@ function join() {
 
 
 
+/*For registration*/
+function registerUser() {
+	console.log("This function is being called")
+	username = document.getElementById('orangeForm-name').value;
+	email = document.getElementById('orangeForm-email').value;
+	password = document.getElementById('orangeForm-pass').value;
+	fetch(baseUrl+'/chat/register/'+username+'/'+email+'/'+password, {
+		method: 'get'
+	})
+	.then (response => response.json() )
+    	.then (data =>completeRegister(data))
+    	.catch(error => {
+        {alert("Error: Something went wrong:"+error);}
+    });
+}
 
+function completeRegister(results) {
+	var status = results['status'];
+	console.log(status);
+	if (status =="registrationFailed"){
+		alert("Username/Email unavailable. Make sure the password is more than 6 characters");
+		leaveSession();
+		return;
+	}
+	var user = results['user'];
+	alert("Success");
+	username=document.getElementById('orangeForm-name').value='';
+	email=document.getElementById('orangeForm-email').value='';
+	password=document.getElementById('orangeForm-pass').value='';
+}
+	
 
 
 
@@ -86,6 +135,7 @@ function completeSend(results) {
 //function called on submit or enter on text input
 function sendText() {
     var message = document.getElementById('message').value;
+    document.getElementById('message').value = "";
     console.log("Send: "+myname+":"+message);
 	fetch(baseUrl+'/chat/send/'+myname+'/'+message, {
         method: 'get'
@@ -126,20 +176,13 @@ function disappearingSend(){{
 
 
 
-
-
-
-
-
-
-
 function completeFetch(result) {
 	messages = result["messages"];
 	
 	//pushing a new user to the current user array
 	
-	/*
-	currentUsers.indexOf(messages[0].user) === -1? currentUsers.push(messages[0].user) : console.log("This item already exists"); 
+	
+	/*currentUsers.indexOf(messages[0].user) === -1? currentUsers.push(messages[0].user) : console.log("This item already exists"); 
 	//currentUsers.push(messages[0].user); 
 	
 	//printing the array to dev tools
@@ -200,7 +243,10 @@ function fetchMessage() {
     .catch(error => {
         {console.log("Server appears down");}
     })  
-    
+   
+	
+
+	
     	
 }
 /* Functions to set up visibility of sections of the display */
@@ -218,27 +264,10 @@ function startSession(name){
 }
 
 function leaveSession(){
+    fetch(baseUrl+'/chat/users/remove/'+myname, {
+        method: 'get'
+    })
     state="off";
-    
-    //we want: when the user presses the leave button, we want that user to get subtracted from the array of currentUsers, then we want to update the screen 
-    
-    //this should output the current user
-    console.log(myname); 
-    
-    //now, deleting myname from the array currentUsers and reupdating what is displayed
-    const index = currentUsers.indexOf(myname); 
-    
-    if (index > -1){ //only splice array when item is found 
-    	currentUsers.splice(index, 1); 
-    }
-    
-    console.log(currentUsers); 
-    
-	var remainingMembers = "<font color='blue'>" + currentUsers + ", </font>";
-		document.getElementById('members').innerHTML=""; 
-		document.getElementById('members').innerHTML +=
-	    	remainingMembers; 
-	    	
     document.getElementById('yourname').value = "";
     document.getElementById('register').style.display = 'block';
     document.getElementById('user').innerHTML = "";
@@ -247,6 +276,8 @@ function leaveSession(){
     document.getElementById('leave').style.display = 'none';
 	clearInterval(inthandle);
 }
+
+
 
 //To register a user
 
@@ -288,7 +319,6 @@ function checkRegistration(results){
 	password = document.getElementById('regisPassword').value = '';
 }
 */
-
 
 
 
