@@ -36,9 +36,6 @@ void addUser(string username, string password, string email, map<string,string> 
     string jsonMessage = "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
     userMap[username] = jsonMessage;
 	string user=username, pass=password;
-    chatDB cDB;
-	
-	vector<chatEntry> results;
 	
 	cDB.addEntry(user,email,pass);
 }
@@ -62,6 +59,11 @@ string getMessagesJSON(string username, map<string,vector<string>> &messageMap) 
 
 int main(void) {
  Server svr;
+	
+  chatDB cDB;
+  vector<chatEntry> results;
+	
+
  int nextUser=0;
  map<string,vector<string>> messageMap;
  map<string,string> userMap;
