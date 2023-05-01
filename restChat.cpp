@@ -90,13 +90,17 @@ int main(void) {
  
  
 //edited for joining with username and password
- svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
- res.set_header("Access-Control-Allow-Origin","*");
- 	string username = req.matches[1];
-	string password = req.matches[2];
-	string email = userEmail[username];
-	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
+svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
+    res.set_header("Access-Control-Allow-Origin","*");
+    string username = req.matches[1];
+    string password = req.matches[2];
+    string email = userEmail[username];
+    chatDB cDB;
+    cDB.addEntry(username, email, password);
+    string userDetails = "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
+});
 
+	 
  string result;
  // Check if user with this name and password exists
  if (userDetails== userMap[username]){
