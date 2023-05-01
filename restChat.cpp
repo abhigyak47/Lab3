@@ -16,8 +16,6 @@
 #include "chatDB.h"
 #include "chatEntry.h"
 
-#pragma GCC target("c++17")
-
 using namespace httplib;
 using namespace std;
 
