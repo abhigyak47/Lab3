@@ -144,7 +144,7 @@ function sendText() {
     var message = document.getElementById('message').value;
     document.getElementById('message').value = "";
     console.log("Send: "+myname+":"+message);
-	fetch(baseUrl+'/chat/send/'+myname+'/'+message, {
+	fetch(baseUrl+'/chat/send/'+globalVarToken+'/'+message, { //token auth add
         method: 'get'
     })
     .then (response => response.json() )
