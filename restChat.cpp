@@ -95,8 +95,7 @@ svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
     string username = req.matches[1];
     string password = req.matches[2];
     string email = userEmail[username];
-    chatDB cDB;
-    cDB.addEntry(username, email, password);
+    
     string userDetails = "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 });
 
