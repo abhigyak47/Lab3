@@ -8,24 +8,24 @@
 
 #include <mariadb/conncpp.hpp>
 
-#include "pizzaEntry.h"
+#include "userEntry.h"
 
-#ifndef PIZZADB_H
-#define PIZZADB_H
+#ifndef USERDB_H
+#define USERDB_H
 
-#define DB_URL "jdbc:mariadb://localhost:3306/kenyon"
-#define USER "kenyon"
-#define PASS "GambierOwls"
+#define DB_URL "jdbc:mariadb://localhost:3306/chat"
+#define USER "root"
+#define PASS "Altri@@12345"
 
 using namespace std;
 
-class pizzaDB {
+class chatDB {
 public:
-    pizzaDB();
-    vector<pizzaEntry> find(string search);
+    chatDB();
+    vector<chatEntry> find(string search);
     pizzaEntry fetchEntry(string idnum);
-    void addEntry(string name, string address, string rating);
-    void editEntry(string idnum, string name,string nddress,string rating);
+    void addEntry(string user, string email, string pass);
+    void editEntry(string idnum, string user,string email,string pass);
     void deleteEntry(string idnum);
 private:
     const string db_url=DB_URL;
@@ -37,4 +37,4 @@ private:
 
 };
 
-#endif /* PIZZADB_H */
+#endif /* CHATDB_H */
