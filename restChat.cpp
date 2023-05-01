@@ -107,7 +107,6 @@ int main(void) {
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 	
 	vector<chatEntry> entries = cDB.getUserEntries(username);
-});
 	
  string result;
  // Check if user with this name and password exists
