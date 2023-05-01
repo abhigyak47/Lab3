@@ -114,10 +114,9 @@ int main(void) {
  if (username==entries[0].user && password==entries[0].pass){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
-	 
-	 messageMap[username]= empty;
-	userEmail[username] = email;
-	addUser(username , password, email , userMap);
+	
+	email=userEmail[username];
+	addUser(username , password, entries[0].email , userMap);
 	 
  } else {
  result = "{\"status\":\"failure\"}";
