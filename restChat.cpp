@@ -220,6 +220,9 @@ svr.Get(R"(/chat/users/remove/(.*))", [&](const Request& req, Response& res) {
     res.set_header("Access-Control-Allow-Origin","*");
     string username = req.matches[1];
     userMap.erase(username);
+
+//remove token when logout
+    userTokenMap.erase(username); 
 });
 
  
