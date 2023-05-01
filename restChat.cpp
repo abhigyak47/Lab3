@@ -104,7 +104,17 @@ int main(void) {
 	string password = req.matches[2];
 	string email = userEmail[username];
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
+	
+	vector<ChatEntry> entries = getChatEntriesForUser(username);
 
+for (int i = 0; i < entries.size(); i++) {
+    cout << "ID: " << entries[i].getID() << endl;
+    cout << "User: " << entries[i].getUser() << endl;
+    cout << "Email: " << entries[i].getEmail() << endl;
+    cout << "Password: " << entries[i].getPass() << endl;
+    cout << endl;
+}
+	
  string result;
  // Check if user with this name and password exists
  if (userDetails== userMap[username]){
