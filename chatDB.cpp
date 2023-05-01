@@ -62,6 +62,33 @@ vector<chatEntry> chatDB::find(string search) {
 
 }
 
+//Get entries for given username
+vector<chatEntry> chatDB::getUserEntries(string username) {
+    vector<chatEntry> entries;
+    
+    // Make sure the connection is still valid
+    if (!conn) {
+        cerr << "Invalid database connection" << endl;
+        exit (EXIT_FAILURE);
+    }
+
+    // Create a new statement
+    std::unique_ptr<sql::PreparedStatement> stmnt(conn->prepareStatement("SELECT * FROM chat WHERE user = ?"));
+    stmnt->setString(1, username);
+
+    // Execute query
+    sql::ResultSet *res = stmnt->executeQuery();
+
+    // Loop through and add chat entries
+    while (res->next()) {
+        chatEntry entry(res->getString("ID"), res->getString("user"), res->getString("email"), res->getString("pass"));
+        entries.push_back(entry);
+    }
+
+    return entries;
+}
+
+
 void chatDB::addEntry(string user,string email,string pass){
 
 	if (!conn) {
