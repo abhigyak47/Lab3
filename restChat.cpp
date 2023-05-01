@@ -35,13 +35,9 @@ void addMessage(string username, string message, map<string,vector<string>> &mes
 void addUser(string username, string password, string email, map<string,string> &userMap) {
     string jsonMessage = "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
     userMap[username] = jsonMessage;
-    
-    // Connect to the database
-    chatDB db("chat");
-    // Construct the SQL query to insert the user's details into the chat table
-    string query = "INSERT INTO chat (user, email, pass) VALUES ('" + username + "', '" + email + "', '" + password + "')";
-
-    db.query(query);
+	string user=username, pass=password;
+    chatDB cDB;
+	cDB.addEntry(user,email,pass);
 }
 
 
