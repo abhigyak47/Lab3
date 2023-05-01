@@ -104,14 +104,17 @@ int main(void) {
  	string username = req.matches[1];
 	string password = req.matches[2];
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\"}";
-
+	cout<<userDetails;
 	vector<chatEntry> entries = cDB.getUserEntries(username);
 
 	for (int i = 0; i < entries.size(); i++) {
-    
-    	string jsonEntry = "{\"user\":\""+entries[i].user+"\",\"pass\":\""+entries[i].pass+"\"}";
-    	cout<<jsonEntry;
-}
+    cout << "Entry #" << i+1 << ":" << endl;
+    cout << "ID: " << entries[i].ID << endl;
+    cout << "User: " << entries[i].user << endl;
+    cout << "Email: " << entries[i].email << endl;
+    cout << "Password: " << entries[i].pass << endl;
+    cout << endl;
+    }
 	
  string result;
  // Check if user with this name and password exists
