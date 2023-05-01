@@ -102,8 +102,6 @@ int main(void) {
  if (userDetails== userMap[username]){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
-	chatDB cDB;
-	cDB.addEntry(username, email, password);
  } else {
  result = "{\"status\":\"failure\"}";
  }
