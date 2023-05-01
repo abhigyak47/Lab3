@@ -108,7 +108,11 @@ int main(void) {
 	vector<chatEntry> entries = cDB.getUserEntries(username);       
 	    cout << "User: " << entries[0].user << endl;
 	    cout << "Password: " << entries[0].pass << endl;
-	    cout << endl;
+	    uname=entries[0].user;
+	    upass=entries[0].pass;
+	 cout<<uname;
+	 cout<<upass;
+	
 	 string userDatabase= "{\"user\":\""+entries[0].user+"\",\"pass\":\""+entries[0].pass+"\"}";
 	 cout<<userDatabase;
  string result;
