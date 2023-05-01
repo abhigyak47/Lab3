@@ -182,7 +182,7 @@ if (usernameExists) {
 	 
 	 bool userExists = false;
     string username;
-    for (auto const& [key, val] : userTokenMap) {
+    for (auto& [key, val] : userTokenMap) {
         if (val == token) {
             userExists = true;
             username = key;
