@@ -8,7 +8,7 @@
 
 #include <mariadb/conncpp.hpp>
 
-#include "userEntry.h"
+#include "chatEntry.h"
 
 #ifndef USERDB_H
 #define USERDB_H
