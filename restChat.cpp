@@ -103,8 +103,7 @@ int main(void) {
     res.set_header("Access-Control-Allow-Origin", "*");
     string username = req.matches[1];
     string password = req.matches[2];
-    string email = userEmail[username];
-    string userDetails = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\",\"email\":\"" + email + "\"}";
+    string userDetails = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\"}";
     
     vector<chatEntry> entries = cDB.getUserEntries(username);
 
@@ -115,7 +114,6 @@ int main(void) {
             jsonStr += ",";
         }
         jsonStr += "{\"user\":\"" + entry.user + "\",";
-        jsonStr += "\"email\":\"" + entry.email + "\",";
         jsonStr += "\"pass\":\"" + entry.pass + "\"}";
     }
     jsonStr += "]";
