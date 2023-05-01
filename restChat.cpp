@@ -105,7 +105,7 @@ int main(void) {
 	string email = userEmail[username];
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 	
-	vector<ChatEntry> entries = getChatEntriesForUser(username);
+	vector<chatEntry> entries = getUserEntries(username);
 
 for (int i = 0; i < entries.size(); i++) {
     cout << "ID: " << entries[i].getID() << endl;
