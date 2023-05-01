@@ -1,5 +1,5 @@
 // Rest based chat client
-// Jim Skon 2022
+// Jim Skon 2023
 // Kenyon College
 
 var baseUrl = 'http://3.128.197.4:5005';
