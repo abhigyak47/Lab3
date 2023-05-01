@@ -37,6 +37,9 @@ void addUser(string username, string password, string email, map<string,string> 
     userMap[username] = jsonMessage;
 	string user=username, pass=password;
     chatDB cDB;
+	
+	vector<chatEntry> results;
+	
 	cDB.addEntry(user,email,pass);
 }
 
@@ -78,6 +81,10 @@ int main(void) {
  	string username = req.matches[1];
 	string email = req.matches[2];
 	string password = req.matches[3];
+	 
+	results = cDB.findByFirst(username);
+	cout<<results;
+	 
  	string result;
  	vector<string> empty;
  if (messageMap.count(username) or messageMap.count(email) or password.length() < 7){
