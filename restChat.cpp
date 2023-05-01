@@ -139,11 +139,15 @@ int main(void) {
  
  
  svr.Get(R"(/chat/fetch/(.*))", [&](const Request& req, Response& res) {
- string username = req.matches[1];
- res.set_header("Access-Control-Allow-Origin","*");
- string resultJSON = getMessagesJSON(username,messageMap);
- res.set_content(resultJSON, "text/json");
- });
+    string username = req.matches[1];
+    res.set_header("Access-Control-Allow-Origin","*");
+    vector<chatEntry> results;
+    chatDB cDB;
+    results = cDB.findByuser(username);
+    string resultJSON = getMessagesJSON(username, messageMap);
+    res.set_content(resultJSON, "text/json");
+});
+
  
 //microservice for setting up user list in json	
 svr.Get(R"(/chat/users)", [&](const Request& req, Response& res) {
