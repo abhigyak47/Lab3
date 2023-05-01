@@ -3,14 +3,14 @@
 chatEntry::chatEntry() {
 }
 
-pizzaEntry::pizzaEntry(sql::SQLString ID, sql::SQLString user, sql::SQLString email, sql::SQLString pass) {
+chatEntry::chatEntry(sql::SQLString ID, sql::SQLString user, sql::SQLString email, sql::SQLString pass) {
     this->ID = ID;
     this->user = user;
     this->email = email;
     this->pass = pass;
 }
 
-string pizzaEntry::text() {
+string chatEntry::text() {
 	string result = ID + ". ";
 	result += user + " ";
 	result += email + " ";
@@ -19,7 +19,7 @@ string pizzaEntry::text() {
 
 }
 
-string pizzaEntry::json() {
+string chatEntry::json() {
 	string result = "{\"ID\":\"" + ID + "\",";
 	result += "\"user\":\"" + user + "\",";
 	result += "\"email\":\"" + email + "\",";
