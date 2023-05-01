@@ -108,12 +108,10 @@ int main(void) {
 	vector<chatEntry> entries = cDB.getUserEntries(username);       
 	    //cout << "User: " << entries[0].user << endl;
 	    //cout << "Password: " << entries[0].pass << endl;
-	    cout << entries[0].user << endl;
-	    cout << entries[0].pass << endl;
-	 //cout<< "{\"user\":\""+entries[0].user+"\",\"pass\":\""+entries[0].pass+"\"}";
+
  string result;
  // Check if user with this name and password exists
- if (userDetails== userMap[username]){
+ if (username==entries[0].user && password==entries[0].pass){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
  } else {
