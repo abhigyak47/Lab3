@@ -165,10 +165,21 @@ if (usernameExists) {
 
  svr.Get(R"(/chat/send/(.*)/(.*))", [&](const Request& req, Response& res) {
  res.set_header("Access-Control-Allow-Origin","*");
-	string username = req.matches[1];
+	string token = req.matches[1];
 	string message = req.matches[2];
-	string result; 
- if (!messageMap.count(username)) {
+	string result;
+	 
+	 bool userExists = false;
+    string username;
+    for (auto const& [key, val] : userTokenMap) {
+        if (val == token) {
+            userExists = true;
+            username = key;
+            break;
+        }
+    }
+	 
+ if (!messageMap.count(username) or !userExists) {
  result = "{\"status\":\"baduser\"}";
 	} else {
 	addMessage(username,message,messageMap);
