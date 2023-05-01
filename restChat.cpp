@@ -102,8 +102,8 @@ int main(void) {
  if (userDetails== userMap[username]){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
-	pizzaDB pDB;
-	pDB.addEntry(username, email, password);
+	chatDB cDB;
+	cDB.addEntry(username, email, password);
  } else {
  result = "{\"status\":\"failure\"}";
  }
