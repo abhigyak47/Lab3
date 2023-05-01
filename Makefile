@@ -1,8 +1,8 @@
 
 # MakeFile for restChat
 # server using C++ Microservice
-# sudo mkdir /var/www/html/restChat
-# sudo chown ubuntu /var/www/html/restChat
+# sudo mkdir /var/www/html/restChatDB
+# sudo chown ubuntu /var/www/html/restChatDB
 CC=g++
 CFLAGS= -std=c++14 -Wno-deprecated-declarations
 RM= /bin/rm -f
@@ -23,12 +23,12 @@ restChat.o: restChat.cpp httplib.h
 restChat: restChat.o chatDB.o chatEntry.o 
 	$(CC) restChat.o chatDB.o chatEntry.o -o restChat -L/usr/local/lib -lmariadbcpp
 PutHTML:
-	cp restChat.html /var/www/html/restChat/
-	cp restChat.css /var/www/html/restChat/
-	cp restChat.js /var/www/html/restChat/
+	cp restChat.html /var/www/html/restChatDB/
+	cp restChat.css /var/www/html/restChatDB/
+	cp restChat.js /var/www/html/restChatDB/
 
 	echo "Current contents of your HTML directory: "
-	ls -l /var/www/html/restChat/
+	ls -l /var/www/html/restChatDB/
 
 clean:
 	rm restChat *.o
