@@ -87,7 +87,7 @@ int main(void) {
 	string email = req.matches[2];
 	string password = req.matches[3];
 	 
-	results = cDB.findByFirst(username);
+	results = cDB.findByuser(username);
 	 
  	string result;
  	vector<string> empty;
