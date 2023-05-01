@@ -108,10 +108,8 @@ int main(void) {
 	vector<chatEntry> entries = cDB.getUserEntries(username);
 
 	for (int i = 0; i < entries.size(); i++) {
-	    string uname= entries[i].user;
-	    string upass= entries[i].pass;
-	    cout<<uname;
-    	    cout<<upass;
+	    cout<<entries[i].user;
+	    cout<<entries[i].pass;
     }
     
 	
