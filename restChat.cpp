@@ -107,18 +107,23 @@ int main(void) {
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 	
 	vector<chatEntry> entries = cDB.getUserEntries(username);
-	for (int i = 0; i < entries.size(); i++) {
-    cout << "Entry #" << i+1 << ":" << endl;
-    cout << "ID: " << entries[i].ID << endl;
-    cout << "User: " << entries[i].user << endl;
-    cout << "Email: " << entries[i].email << endl;
-    cout << "Password: " << entries[i].pass << endl;
-    cout << endl;
-}
+
+
+		string jsonStr = "[";
+		for (int i = 0; i < entries.size(); i++) {
+		    chatEntry entry = entries[i];
+		    if (i != 0) {
+			jsonStr += ",";
+		    }
+		    jsonStr += "{\"user\":\"" + entry.user + "\",";
+		    jsonStr += "\"email\":\"" + entry.pass + "\",";
+		    jsonStr += "\"pass\":\"" + entry.email + "\"}";
+		}
+		jsonStr += "]";
 	
  string result;
  // Check if user with this name and password exists
- if (userDetails== userMap[username]){
+ if (userDetails== jsonStr]){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
  } else {
