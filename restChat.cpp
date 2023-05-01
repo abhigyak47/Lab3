@@ -21,6 +21,20 @@ using namespace std;
 
 const int port = 5005;
 
+//Username-Token Map
+map<string,string> userTokenMap;
+
+//function to generate random token
+string generateToken(int length) {
+    string result(length, ' ');
+    const string allowedCharacters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for (int i = 0; i < length; ++i) {
+        int randomIndex = rand() % allowedCharacters.size();
+        result[i] = allowedCharacters[randomIndex];
+    }
+    return result;
+}
+
 
 void addMessage(string username, string message, map<string,vector<string>> &messageMap) {
 	/* iterate through users adding message to each */
@@ -37,6 +51,7 @@ void addUser(string username, string password, string email, map<string,string> 
     userMap[username] = jsonMessage;
 	string user=username, pass=password;
 	
+	//added so that the database table is updated whenever someone successfully registers
 	chatDB cDB;
 	cDB.addEntry(user,email,pass);
 }
@@ -131,8 +146,12 @@ if (usernameExists) {
  string result;
  // Check if user with this name and password exists
  if (username==entries[0].user && password==entries[0].pass){
- result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
-	cout << username << " joins" << endl;
+	 
+	 string token=generateToken(10); //generate a token of length 10 and add it to the usertoken map
+	 userTokenMap[username] = token;
+	 
+  result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"token\":\"" + token + "\"}"; //modify result json to include token
+	cout << username << " joins. Token: " << token << endl;
 	
 	addUser(username , password, entries[0].email , userMap);
 	 
