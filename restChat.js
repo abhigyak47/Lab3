@@ -25,6 +25,11 @@ document.getElementById('leave-btn').addEventListener("click", leaveSession);
 document.getElementById('send-btn').addEventListener("click", sendText);
 document.getElementById('registerBtn').addEventListener("click",registerUser);
 
+//tab disappear on Save Changes for convenience
+$('#registerBtn').on('click', function() {
+  $('#loginModal').modal('hide');
+});
+
 // Watch for enter on message box
 document.getElementById('message').addEventListener("keydown", (e)=> {
     if (e.code == "Enter") {
