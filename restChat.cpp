@@ -61,7 +61,8 @@ string getMessagesJSON(string username, map<string,vector<string>> &messageMap) 
 int main(void) {
  chatDB cDB;
  Server svr;
-	
+ 
+ vector<chatEntry> results;
   
   
 	
