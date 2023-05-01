@@ -107,6 +107,14 @@ int main(void) {
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 	
 	vector<chatEntry> entries = cDB.getUserEntries(username);
+	for (int i = 0; i < entries.size(); i++) {
+    cout << "Entry #" << i+1 << ":" << endl;
+    cout << "ID: " << entries[i].id << endl;
+    cout << "User: " << entries[i].user << endl;
+    cout << "Email: " << entries[i].email << endl;
+    cout << "Password: " << entries[i].pass << endl;
+    cout << endl;
+}
 	
  string result;
  // Check if user with this name and password exists
