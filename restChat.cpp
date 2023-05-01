@@ -103,8 +103,8 @@ int main(void) {
  res.set_header("Access-Control-Allow-Origin","*");
  	string username = req.matches[1];
 	string password = req.matches[2];
-	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\"}";
-	cout<<userDetails;
+	//string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\"}";
+	//cout<<userDetails;
 	vector<chatEntry> entries = cDB.getUserEntries(username);       
 	    //cout << "User: " << entries[0].user << endl;
 	    //cout << "Password: " << entries[0].pass << endl;
@@ -114,6 +114,11 @@ int main(void) {
  if (username==entries[0].user && password==entries[0].pass){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
+	 
+	 messageMap[username]= empty;
+	userEmail[username] = email;
+	addUser(username , password, email , userMap);
+	 
  } else {
  result = "{\"status\":\"failure\"}";
  }
