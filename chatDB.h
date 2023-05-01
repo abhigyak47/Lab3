@@ -24,8 +24,6 @@ public:
     chatDB();
     vector<chatEntry> find(string search);
     
-    vector<chatEntry> findByuser(string user);
-    
     chatEntry fetchEntry(string idnum);
     void addEntry(string user, string email, string pass);
     void editEntry(string idnum, string user,string email,string pass);
