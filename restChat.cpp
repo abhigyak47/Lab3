@@ -62,7 +62,7 @@ int main(void) {
  Server svr;
 	
   
-  vector<chatEntry> results;
+  
 	
 
  int nextUser=0;
