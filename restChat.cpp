@@ -106,15 +106,9 @@ int main(void) {
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\"}";
 	cout<<userDetails;
 	vector<chatEntry> entries = cDB.getUserEntries(username);       
-	    cout << "User: " << entries[0].user << endl;
-	    cout << "Password: " << entries[0].pass << endl;
-	    string uname=entries[0].user;
-	    string upass=entries[0].pass;
-	 cout<<uname;
-	 cout<<upass;
-	
-	 string userDatabase= "{\"user\":\""+entries[0].user+"\",\"pass\":\""+entries[0].pass+"\"}";
-	 cout<<userDatabase;
+	    //cout << "User: " << entries[0].user << endl;
+	    //cout << "Password: " << entries[0].pass << endl;
+	 cout<< "{\"user\":\""+entries[0].user+"\",\"pass\":\""+entries[0].pass+"\"}";
  string result;
  // Check if user with this name and password exists
  if (userDetails== userMap[username]){
