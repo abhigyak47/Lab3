@@ -105,7 +105,8 @@ int main(void) {
 	string password = req.matches[2];
 	string email = userEmail[username];
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
-	
+	cout<<username;
+	cout<<password;
 	vector<chatEntry> entries = cDB.getUserEntries(username);
 	for (int i = 0; i < entries.size(); i++) {
     cout << "Entry #" << i+1 << ":" << endl;
