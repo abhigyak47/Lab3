@@ -36,16 +36,22 @@ document.getElementById('message').addEventListener("keydown", (e)=> {
 // Call function on page exit
 window.onbeforeunload = leaveSession;
 
+var globalVarToken = "";
 
 function completeJoin(results) {
     var status = results['status'];
-	console.log(results);
+	//console.log(results);
+	
     if (status != "success") {
         alert("Incorrect Username/Pass! Register if you haven't already");
         leaveSession();
         return;
     }
+	
     var user = results['user'];
+    var token = results['token']; //to extract the token and make it global for use later in username authentication
+    globalVarToken=token;
+	console.log(globalVarToken);
    // console.log(user+"joins");
     /*fetchUsers();*/
     inthandle=setInterval(fetchUsers,500);   /*to check for new users every 500ms*/
