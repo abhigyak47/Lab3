@@ -74,7 +74,6 @@ function updateUser(result) {
 	
 
 
-var myname = "";
 function join() {
 	myname = document.getElementById('yourname').value;
 	mypass = document.getElementById('yourpass').value;
@@ -87,7 +86,6 @@ function join() {
         {alert("Error: Something went wrong:"+error);}
     });
 }
-
 
 
 
