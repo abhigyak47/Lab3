@@ -222,7 +222,7 @@ svr.Get(R"(/chat/users/remove/(.*))", [&](const Request& req, Response& res) {
     userMap.erase(username);
 
 //remove token when logout
-    userTokenMap.erase(username); 
+    //userTokenMap.erase(username); 
 });
 
  
