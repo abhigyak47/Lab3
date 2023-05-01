@@ -46,7 +46,7 @@ function completeJoin(results) {
         return;
     }
     var user = results['user'];
-    console.log(user+"joins");
+   // console.log(user+"joins");
     /*fetchUsers();*/
     inthandle=setInterval(fetchUsers,500);   /*to check for new users every 500ms*/
     startSession(user);
