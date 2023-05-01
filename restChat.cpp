@@ -103,7 +103,7 @@ int main(void) {
 
 	 vector<chatEntry> entries = cDB.getUserEntries(username);
 bool usernameExists = false;
-for (const auto& entry : entries) {
+for (const auto const& entry : entries) {
     if (entry.user == username) {
         usernameExists = true;
         break;
