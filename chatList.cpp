@@ -4,15 +4,15 @@
 #include <map>
 
 #include "httplib.h"
-#include "pizzaDB.h"
-#include "pizzaEntry.h"
+#include "chatDB.h"
+#include "chatEntry.h"
 
 int main() {
-  pizzaDB pdb;
+  chatDB cdb;
   
-  vector<pizzaEntry> results;
+  vector<chatEntry> results;
 
-  results = pdb.find("");
+  results = cdb.find("");
 
   for (int i = 0; i<results.size(); i++) {
     cout << results[i].text() << endl;
