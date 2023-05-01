@@ -115,7 +115,6 @@ int main(void) {
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
 	
-	email=userEmail[username];
 	addUser(username , password, entries[0].email , userMap);
 	 
  } else {
