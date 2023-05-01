@@ -87,8 +87,6 @@ int main(void) {
 	string email = req.matches[2];
 	string password = req.matches[3];
 	 
-	results = cDB.findByuser(username);
-	 
  	string result;
  	vector<string> empty;
  if (messageMap.count(username) or messageMap.count(email) or password.length() < 7){
