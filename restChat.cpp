@@ -110,9 +110,10 @@ int main(void) {
 	for (int i = 0; i < entries.size(); i++) {
 	    string uname= entries[i].user;
 	    string upass= entries[i].pass;
+	    cout<<uname;
+    	    cout<<upass;
     }
-    cout<<uname;
-    cout<<upass;
+    
 	
  string result;
  // Check if user with this name and password exists
