@@ -61,11 +61,6 @@ string getMessagesJSON(string username, map<string,vector<string>> &messageMap) 
 int main(void) {
  chatDB cDB;
  Server svr;
- 
- vector<chatEntry> results;
-  
-  
-	
 
  int nextUser=0;
  map<string,vector<string>> messageMap;
@@ -141,9 +136,6 @@ int main(void) {
  svr.Get(R"(/chat/fetch/(.*))", [&](const Request& req, Response& res) {
     string username = req.matches[1];
     res.set_header("Access-Control-Allow-Origin","*");
-    vector<chatEntry> results;
-    chatDB cDB;
-    results = cDB.findByuser(username);
     string resultJSON = getMessagesJSON(username, messageMap);
     res.set_content(resultJSON, "text/json");
 });
