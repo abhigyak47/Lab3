@@ -52,8 +52,8 @@ void addUser(string username, string password, string email, map<string,string> 
 	string user=username, pass=password;
 	
 	//added so that the database table is updated whenever someone successfully registers
-	chatDB cDB;
-	cDB.addEntry(user,email,pass);
+	/*chatDB cDB;
+	cDB.addEntry(user,email,pass);*/
 }
 
 
@@ -115,6 +115,9 @@ for (const auto& entry : entries) {
  } else {
  messageMap[username]= empty;
 	userEmail[username] = email;
+	chatDB cDB;
+	string user=username; string pass=password;
+	cDB.addEntry(user,email,pass);
 	addUser(username , password, email , userMap);
  result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"email\":\"" + email + "\",\"pass\":\"" + password + "\"}";
  }
