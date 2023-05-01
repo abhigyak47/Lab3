@@ -4,7 +4,7 @@
 # sudo mkdir /var/www/html/restChatDB
 # sudo chown ubuntu /var/www/html/restChatDB
 CC=g++
-CFLAGS= -std=c++14 -Wno-deprecated-declarations
+CFLAGS= -std=c++17 -Wno-deprecated-declarations
 RM= /bin/rm -f
 
 all: restChat PutHTML
