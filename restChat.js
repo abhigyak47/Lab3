@@ -39,6 +39,7 @@ window.onbeforeunload = leaveSession;
 
 function completeJoin(results) {
     var status = results['status'];
+	console.log(status);
     if (status != "success") {
         alert("Incorrect Username/Pass! Register if you haven't already");
         leaveSession();
