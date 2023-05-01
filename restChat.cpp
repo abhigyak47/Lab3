@@ -103,7 +103,7 @@ int main(void) {
 
 	 vector<chatEntry> entries = cDB.getUserEntries(username);
 bool usernameExists = false;
-for (const auto const& entry : entries) {
+for (const auto& entry : entries) {
     if (entry.user == username) {
         usernameExists = true;
         break;
@@ -182,7 +182,7 @@ if (usernameExists) {
 	 
 	 bool userExists = false;
     string username;
-    for (auto& [key, val] : userTokenMap) {
+    for (auto const& [key, val] : userTokenMap) {
         if (val == token) {
             userExists = true;
             username = key;
