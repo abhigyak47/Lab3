@@ -23,7 +23,7 @@ class chatDB {
 public:
     chatDB();
     vector<chatEntry> find(string search);
-    
+    vector<chatEntry> getUserEntries(string username);
     chatEntry fetchEntry(string idnum);
     void addEntry(string user, string email, string pass);
     void editEntry(string idnum, string user,string email,string pass);
