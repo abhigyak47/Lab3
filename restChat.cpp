@@ -179,7 +179,8 @@ if (usernameExists) {
         }
     }
 	 
- if (!messageMap.count(username) or !userExists) {
+ //if (!messageMap.count(username) or !userExists) {
+if (!userExists) {
  result = "{\"status\":\"baduser\"}";
 	} else {
 	addMessage(username,message,messageMap);
