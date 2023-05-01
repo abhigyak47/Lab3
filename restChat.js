@@ -39,7 +39,7 @@ window.onbeforeunload = leaveSession;
 
 function completeJoin(results) {
     var status = results['status'];
-	console.log(status);
+	console.log(results);
     if (status != "success") {
         alert("Incorrect Username/Pass! Register if you haven't already");
         leaveSession();
@@ -68,7 +68,7 @@ function fetchUsers() {
 /*Dynamically update the user list*/
 function updateUser(result) {
   var currentUsers = result["users"];
-  console.log(currentUsers);
+  //console.log(currentUsers);
   document.getElementById('members').innerHTML="";
   document.getElementById('members').innerHTML = currentUsers.toString();
 }
