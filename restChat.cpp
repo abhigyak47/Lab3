@@ -103,18 +103,14 @@ int main(void) {
  res.set_header("Access-Control-Allow-Origin","*");
  	string username = req.matches[1];
 	string password = req.matches[2];
-	string email = userEmail[username];
-	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
-	cout<<username;
-	cout<<password;
+	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\"}";
+
 	vector<chatEntry> entries = cDB.getUserEntries(username);
+
 	for (int i = 0; i < entries.size(); i++) {
-    cout << "Entry #" << i+1 << ":" << endl;
-    cout << "ID: " << entries[i].ID << endl;
-    cout << "User: " << entries[i].user << endl;
-    cout << "Email: " << entries[i].email << endl;
-    cout << "Password: " << entries[i].pass << endl;
-    cout << endl;
+    
+    	string jsonEntry = "{\"user\":\""+entries[i].user+"\",\"pass\":\""+entries[i].pass+"\"}";
+    	cout<<jsonEntry;
 }
 	
  string result;
