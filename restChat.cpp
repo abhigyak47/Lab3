@@ -119,7 +119,8 @@ int main(void) {
         jsonStr += "\"pass\":\"" + entry.pass + "\"}";
     }
     jsonStr += "]";
-
+    cout<<jsonStr;
+    cout<<userDetails;
     string result;
     // Check if user with this name and password exists
     if (userDetails == jsonStr) {
