@@ -88,7 +88,6 @@ int main(void) {
 	string password = req.matches[3];
 	 
 	results = cDB.findByFirst(username);
-	cout<<results;
 	 
  	string result;
  	vector<string> empty;
