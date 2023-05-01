@@ -37,7 +37,7 @@ void addUser(string username, string password, string email, map<string,string> 
     userMap[username] = jsonMessage;
 	string user=username, pass=password;
 	
-	
+	chatDB cDB;
 	cDB.addEntry(user,email,pass);
 }
 
