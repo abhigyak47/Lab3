@@ -60,6 +60,7 @@ string getMessagesJSON(string username, map<string,vector<string>> &messageMap) 
 
 int main(void) {
  chatDB cDB;
+ 
  Server svr;
 
  int nextUser=0;
@@ -105,14 +106,7 @@ int main(void) {
 	string email = userEmail[username];
 	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
 	
-	vector<chatEntry> entries = getUserEntries(username);
-
-for (int i = 0; i < entries.size(); i++) {
-    cout << "ID: " << entries[i].getID() << endl;
-    cout << "User: " << entries[i].getUser() << endl;
-    cout << "Email: " << entries[i].getEmail() << endl;
-    cout << "Password: " << entries[i].getPass() << endl;
-    cout << endl;
+	vector<chatEntry> entries = cDB.getUserEntries(username);
 }
 	
  string result;
