@@ -100,36 +100,32 @@ int main(void) {
  
 //edited for joining with username and password
  svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
-    res.set_header("Access-Control-Allow-Origin", "*");
-    string username = req.matches[1];
-    string password = req.matches[2];
-    string userDetails = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\"}";
-    
-    vector<chatEntry> entries = cDB.getUserEntries(username);
-
-    string jsonStr = "[";
-    for (int i = 0; i < entries.size(); i++) {
-        chatEntry entry = entries[i];
-        if (i != 0) {
-            jsonStr += ",";
-        }
-        jsonStr += "{\"user\":\"" + entry.user + "\",";
-        jsonStr += "\"pass\":\"" + entry.pass + "\"}";
-    }
-    jsonStr += "]";
-    cout<<jsonStr;
-    cout<<userDetails;
-    string result;
-    // Check if user with this name and password exists
-    if (userDetails == jsonStr) {
-        result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
-        cout << username << " joins" << endl;
-    } else {
-        result = "{\"status\":\"failure\"}";
-    }
-    res.set_content(result, "text/json");
-});
-
+ res.set_header("Access-Control-Allow-Origin","*");
+ 	string username = req.matches[1];
+	string password = req.matches[2];
+	string email = userEmail[username];
+	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
+	
+	vector<chatEntry> entries = cDB.getUserEntries(username);
+	for (int i = 0; i < entries.size(); i++) {
+    cout << "Entry #" << i+1 << ":" << endl;
+    cout << "ID: " << entries[i].id << endl;
+    cout << "User: " << entries[i].user << endl;
+    cout << "Email: " << entries[i].email << endl;
+    cout << "Password: " << entries[i].pass << endl;
+    cout << endl;
+}
+	
+ string result;
+ // Check if user with this name and password exists
+ if (userDetails== userMap[username]){
+ result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
+	cout << username << " joins" << endl;
+ } else {
+ result = "{\"status\":\"failure\"}";
+ }
+ res.set_content(result, "text/json");
+ });
 
  
 
