@@ -85,15 +85,34 @@ int main(void) {
 	 
  	string result;
  	vector<string> empty;
- if (messageMap.count(username) or messageMap.count(email) or password.length() < 7){
+	 
+	 
+ /*if (messageMap.count(username) or messageMap.count(email) or password.length() < 7){
  result = "{\"status\":\"registrationfailure\"}";
  } else {
  messageMap[username]= empty;
 	userEmail[username] = email;
 	addUser(username , password, email , userMap);
  result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"email\":\"" + email + "\",\"pass\":\"" + password + "\"}";
+ }*/
+	
 
- }
+
+vector<chatEntry> entries = cDB.getUserEntries(username);
+bool usernameExists = false;
+for (const auto& entry : entries) {
+    if (entry.user == username) {
+        usernameExists = true;
+        break;
+    }
+}
+
+if (usernameExists) {
+    result = "{\"status\":\"registrationfailure\"}";
+} else {
+    result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"email\":\"" + email + "\",\"pass\":\"" + password + "\"}";
+}
+	 
  res.set_content(result, "text/json");
  });
  
