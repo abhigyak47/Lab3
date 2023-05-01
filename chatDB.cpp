@@ -62,7 +62,7 @@ vector<chatEntry> chatDB::find(string search) {
 
 }
 
-void pizzaDB::addEntry(string user,string email,string pass){
+void chatDB::addEntry(string user,string email,string pass){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
