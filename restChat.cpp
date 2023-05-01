@@ -13,6 +13,8 @@
 #include "httplib.h"
 #include <vector>
 
+#include "chatDB.h"
+#include "chatEntry.h"
 
 using namespace httplib;
 using namespace std;
@@ -100,6 +102,8 @@ int main(void) {
  if (userDetails== userMap[username]){
  result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
 	cout << username << " joins" << endl;
+	pizzaDB pDB;
+	pDB.addEntry(username, email, password);
  } else {
  result = "{\"status\":\"failure\"}";
  }
@@ -153,6 +157,9 @@ svr.Get(R"(/chat/users/remove/(.*))", [&](const Request& req, Response& res) {
     string username = req.matches[1];
     userMap.erase(username);
 });
+	
+
+	
 
  
  cout << "Server listening on port " << port << endl;
