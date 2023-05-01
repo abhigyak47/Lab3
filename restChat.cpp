@@ -100,37 +100,37 @@ int main(void) {
  
 //edited for joining with username and password
  svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
- res.set_header("Access-Control-Allow-Origin","*");
- 	string username = req.matches[1];
-	string password = req.matches[2];
-	string email = userEmail[username];
-	string userDetails= "{\"user\":\""+username+"\",\"pass\":\""+password+"\",\"email\":\""+email+"\"}";
-	
-	vector<chatEntry> entries = cDB.getUserEntries(username);
+    res.set_header("Access-Control-Allow-Origin", "*");
+    string username = req.matches[1];
+    string password = req.matches[2];
+    string email = userEmail[username];
+    string userDetails = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\",\"email\":\"" + email + "\"}";
+    
+    vector<chatEntry> entries = cDB.getUserEntries(username);
 
+    string jsonStr = "[";
+    for (int i = 0; i < entries.size(); i++) {
+        chatEntry entry = entries[i];
+        if (i != 0) {
+            jsonStr += ",";
+        }
+        jsonStr += "{\"user\":\"" + entry.user + "\",";
+        jsonStr += "\"email\":\"" + entry.email + "\",";
+        jsonStr += "\"pass\":\"" + entry.pass + "\"}";
+    }
+    jsonStr += "]";
 
-		string jsonStr = "[";
-		for (int i = 0; i < entries.size(); i++) {
-		    chatEntry entry = entries[i];
-		    if (i != 0) {
-			jsonStr += ",";
-		    }
-		    jsonStr += "{\"user\":\"" + entry.user + "\",";
-		    jsonStr += "\"email\":\"" + entry.pass + "\",";
-		    jsonStr += "\"pass\":\"" + entry.email + "\"}";
-		}
-		jsonStr += "]";
-	
- string result;
- // Check if user with this name and password exists
- if (userDetails== jsonStr]){
- result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
-	cout << username << " joins" << endl;
- } else {
- result = "{\"status\":\"failure\"}";
- }
- res.set_content(result, "text/json");
- });
+    string result;
+    // Check if user with this name and password exists
+    if (userDetails == jsonStr) {
+        result = "{\"status\":\"success\",\"user\":\"" + username + "\"}";
+        cout << username << " joins" << endl;
+    } else {
+        result = "{\"status\":\"failure\"}";
+    }
+    res.set_content(result, "text/json");
+});
+
 
  
 
