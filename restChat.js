@@ -68,7 +68,7 @@ function fetchUsers() {
 /*Dynamically update the user list*/
 function updateUser(result) {
   var currentUsers = result["users"];
-  //console.log(currentUsers);
+  
   document.getElementById('members').innerHTML="";
   document.getElementById('members').innerHTML = currentUsers.toString();
 }
