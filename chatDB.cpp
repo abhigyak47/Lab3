@@ -1,12 +1,12 @@
 #include <vector>
 #include <iostream>
 #include <mariadb/conncpp.hpp>
-#include "pizzaDB.h"
-#include "pizzaEntry.h"
+#include "chatDB.h"
+#include "chatEntry.h"
 
 
 
-pizzaDB::pizzaDB() {
+chatDB::chatDB() {
   	// Instantiate Driver
   	driver = sql::mariadb::get_driver_instance();
   	
@@ -34,9 +34,9 @@ pizzaDB::pizzaDB() {
    	
 }
 
-vector<pizzaEntry> pizzaDB::find(string search) {
+vector<chatEntry> chatDB::find(string search) {
 
-	vector<pizzaEntry> list;
+	vector<chatEntry> list;
     
     // Make sure the connection is still valid
     if (!conn) {
@@ -48,13 +48,13 @@ vector<pizzaEntry> pizzaDB::find(string search) {
     
     // Execute query
     sql::ResultSet *res = stmnt->executeQuery(
-			"SELECT * FROM pizza WHERE Name like '%"+search+"%' OR "+
-    		 + "Address like '%"+search+"%'");
+			"SELECT * FROM chat WHERE user like '%"+search+"%' OR "+
+    		 + "pass like '%"+search+"%'");
     
     // Loop through and print results
     while (res->next()) {
-    	pizzaEntry entry(res->getString("ID"),res->getString("Name"),
-			res->getString("Address"),res->getString("Rating"));
+    	chatEntry entry(res->getString("ID"),res->getString("user"),
+			res->getString("email"),res->getString("pass"));
 	    list.push_back(entry);
 
     }
@@ -62,7 +62,7 @@ vector<pizzaEntry> pizzaDB::find(string search) {
 
 }
 
-void pizzaDB::addEntry(string name,string address,string rating){
+void pizzaDB::addEntry(string user,string email,string pass){
 
 	if (!conn) {
    		cerr << "Invalid database connection" << endl;
@@ -71,60 +71,6 @@ void pizzaDB::addEntry(string name,string address,string rating){
 
   	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
 
-  	stmnt->executeQuery("INSERT INTO pizza(Name,Address,Rating) VALUES ('"+name+"','"+address+"','"+rating+"')");
-}
-/*
-pizzaEntry pizzaDB::fetchEntry(string id){
-
-	pizzaEntry entry;	
-	
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
-
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-
-  	
-    sql::ResultSet *res = stmnt->executeQuery("SELECT * FROM contacts WHERE ID = '"+id+"'");
-    
-    // Get first entry
-    if (res->next()) {
-    	entry = pizzaEntry(res->getString("First"),res->getString("Last"),
-			res->getString("Phone"),res->getString("Type"),
-	    	res->getString("ID"));
-    }
-    return entry;
+  	stmnt->executeQuery("INSERT INTO chat(user,email,pass) VALUES ('"+user+"','"+email+"','"+pass+"')");
 }
 
-void pizzaDB::editEntry(string idnum,string first,string last,string phone, string type){
-	if (!conn) {
-   		cerr << "Invalid database connection" << endl;
-   		exit (EXIT_FAILURE);
-  	}
-
-  	std::auto_ptr<sql::Statement> stmnt(conn->createStatement());
-
-  	if (type != "Friend" && type != "Family" && type!="Business"){
-     	 type="Other";
-  	}
-  	
-  	stmnt->executeQuery("UPDATE contacts SET First = '"+first+"', Last ='"+last+"', Phone ='"+phone+"', Type ='"+type+"' WHERE ID='"+idnum+"'");
-  	
-}
-
-
-void pizzaDB::deleteEntry(string idnum){
-  // Establish Connection
-  std::unique_ptr<sql::Connection>  conn(driver->connect(db_url, properties));
-    
-  if (!conn) {
-   	cerr << "Invalid database connection" << endl;
-   	exit (EXIT_FAILURE);
-  }
-
-  std::auto_ptr<sql::Statement> stmt(conn->createStatement());
-
-  stmt->execute("DELETE FROM contacts WHERE ID='"+idnum+"'");
-}
-*/
