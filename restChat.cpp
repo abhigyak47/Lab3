@@ -144,7 +144,7 @@ if (usernameExists) {
  
  
 //edited for joining with username and password
- svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
+ /*svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
  res.set_header("Access-Control-Allow-Origin","*");
  	string username = req.matches[1];
 	string password = req.matches[2];
@@ -170,7 +170,28 @@ if (usernameExists) {
  result = "{\"status\":\"failure\"}";
  }
  res.set_content(result, "text/json");
- });
+ });*/
+	
+svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
+    res.set_header("Access-Control-Allow-Origin", "*");
+    string username = req.matches[1];
+    string password = req.matches[2];
+
+    string result;
+    // Check if user with this name and password exists
+    vector<chatEntry> entries = cDB.getUserEntries(username);
+    if (entries.empty() || username != entries[0].user || password != entries[0].pass) {
+        result = "{\"status\":\"failure\"}";
+    } else {
+        string token = generateToken(10);
+        userTokenMap[username] = token;
+        result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"token\":\"" + token + "\"}";
+        cout << username << " joins. Token: " << token << endl;
+    }
+
+    res.set_content(result, "text/json");
+});
+
 
  
 
