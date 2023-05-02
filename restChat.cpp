@@ -163,7 +163,6 @@ if (usernameExists) {
 	 
   result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"token\":\"" + token + "\"}"; //modify result json to include token
 	cout << username << " joins. Token: " << token << endl;
-	
 	addUser(username , password, entries[0].email , userMap);
 	 
  } else {
@@ -187,6 +186,7 @@ svr.Get(R"(/chat/join/(.*)/(.*))", [&](const Request& req, Response& res) {
         userTokenMap[username] = token;
         result = "{\"status\":\"success\",\"user\":\"" + username + "\",\"token\":\"" + token + "\"}";
         cout << username << " joins. Token: " << token << endl;
+	   addUser(username , password, entries[0].email , userMap);
     }
 
     res.set_content(result, "text/json");
